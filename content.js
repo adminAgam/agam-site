@@ -2,7 +2,7 @@ window.AGAM_DEFAULT_CONTENT = {
   settings: {
     whatsapp: "573137297652",
     email: "proyectos@agamingenieria.com",
-    phones: "3137297652 • 3107816552",
+    phones: "3137297652",
     location: "Cajicá, Cundinamarca"
   },
   clients: [

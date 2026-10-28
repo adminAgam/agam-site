@@ -240,6 +240,20 @@
      WHATSAPP Y CONTACTO
      ========================================================= */
 
+  const contactLocation = content.settings?.location || "Cajicá, Cundinamarca";
+  const contactPhones = content.settings?.phones || "3137297652 • 3107816552";
+  const contactEmail = content.settings?.email || "proyectos@agamingenieria.com";
+
+  const summaryEl = document.getElementById("contactSummary");
+  const locationEl = document.getElementById("contactLocation");
+  const phonesEl = document.getElementById("contactPhones");
+  const emailEl = document.getElementById("contactEmail");
+
+  if (summaryEl) summaryEl.textContent = `${contactLocation} • Tel: ${contactPhones} • ${contactEmail}`;
+  if (locationEl) locationEl.textContent = contactLocation;
+  if (phonesEl) phonesEl.textContent = contactPhones;
+  if (emailEl) emailEl.textContent = contactEmail;
+
   const WA_NUMBER = (
     content.settings?.whatsapp ||
     "573137297652"
