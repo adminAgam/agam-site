@@ -1,0 +1,78 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>AGAM | Administración</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="admin.css"></head><body>
+<div id="loginGate" class="loginGate"><form id="loginForm" class="loginCard"><img src="../unnamed.png" alt="AGAM"><h1>Administración segura</h1><p>Ingresa con el usuario administrador autorizado.</p><label>Correo<input id="loginEmail" type="email" autocomplete="username" required></label><label>Contraseña<input id="loginPassword" type="password" autocomplete="current-password" required></label><button class="primary" type="submit">Ingresar</button><p id="loginMessage" class="dangerText"></p></form></div>
+<div class="shell"><aside><a class="brand" href="../"><img src="../unnamed.png" alt="AGAM"><span>Administrador</span></a><nav><button class="navbtn active" data-view="dashboard">Resumen</button><button class="navbtn" data-view="projects">Proyectos</button><button class="navbtn" data-view="clients">Clientes</button><button class="navbtn" data-view="settings">Configuración</button></nav><div class="asideFoot"><span class="statusDot"></span><small id="backendStatus">Conectando…</small><a href="../" target="_blank">Ver sitio público ↗</a></div></aside>
+<main><header><div><p class="eyebrow">AGAM Ingeniería SAS</p><h1 id="viewTitle">Panel administrativo</h1></div><div class="userbar"><small id="adminEmail"></small><button id="logoutBtn">Cerrar sesión</button><button class="primary" id="saveAll">Guardar cambios</button></div></header><div id="notice" class="notice"><strong>Fase 3.</strong> Administración segura, optimización de imágenes y limpieza automática de archivos activa.</div>
+<section id="dashboard" class="view active"><div class="stats"><article><span>Proyectos</span><strong id="projectCount">0</strong><small>publicados</small></article><article><span>Clientes</span><strong id="clientCount">0</strong><small>visibles</small></article><article><span>Estado</span><strong class="ok">Activo</strong><small id="syncLabel">sincronizado</small></article></div><div class="panel"><h2>Administración simple</h2><p>Desde aquí podrás cambiar fotografías de proyectos, crear proyectos, agregar clientes y modificar los datos principales sin editar código.</p><div class="quick"><button data-go="projects">＋ Nuevo proyecto</button><button data-go="clients">＋ Nuevo cliente</button><button data-go="settings">⚙ Datos de contacto</button></div></div></section>
+<section id="projects" class="view"><div class="sectionHead"><div><h2>Proyectos</h2><p>Administra las fotografías y la información que aparece en “Ver Proyectos”.</p></div><div class="sectionTools"><input id="projectSearch" class="searchInput" type="search" placeholder="Buscar proyecto…"><button class="primary" id="addProject">＋ Agregar proyecto</button></div></div><div id="projectList" class="cards"></div></section>
+<section id="clients" class="view"><div class="sectionHead"><div><h2>Clientes</h2><p>Agrega, oculta, reemplaza o elimina logos de clientes.</p></div><div class="sectionTools"><input id="clientSearch" class="searchInput" type="search" placeholder="Buscar cliente…"><button class="primary" id="addClient">＋ Agregar cliente</button></div></div><div id="clientList" class="cards"></div></section>
+<section id="settings" class="view"><div class="sectionHead"><div><h2>Configuración</h2><p>Datos generales utilizados por el sitio.</p></div></div><div class="panel formgrid"><label>WhatsApp<input id="sWhatsapp"></label><label>Correo<input id="sEmail" type="email"></label><label>Teléfonos<input id="sPhones"></label><label>Ubicación<input id="sLocation"></label></div><div class="panel maintenance"><h2>Galerías de proyectos</h2><p>En <strong>Proyectos → Galería</strong> puedes agregar fotografías adicionales. La imagen principal continúa siendo la portada.</p></div><div class="panel maintenance"><h2>Mantenimiento</h2><p>Revisa Storage y elimina únicamente imágenes de <code>projects/</code> y <code>clients/</code> que ya no estén asociadas a ningún registro.</p><button id="cleanupMedia">🧹 Buscar y limpiar archivos huérfanos</button></div></section>
+</main></div>
+<dialog id="editor"><form method="dialog" id="editorForm"><div class="modalHead"><div><p class="eyebrow" id="editorType">Contenido</p><h2 id="editorTitle">Editar</h2></div><button class="iconbtn" value="cancel" aria-label="Cerrar">×</button></div><input type="hidden" id="itemId"><input type="hidden" id="itemKind"><label>Nombre / título<input id="itemName" required></label><label id="descWrap">Descripción<textarea id="itemDesc" rows="3"></textarea></label><label>Imagen<input id="itemImage" placeholder="URL o ruta de imagen"><div class="uploadBox"><strong>Subir nueva imagen</strong><input id="itemFile" type="file" accept="image/jpeg,image/png,image/webp"><small>JPG, PNG o WEBP · máximo 5 MB. Se convierte automáticamente a WEBP optimizado.</small><small id="fileInfo"></small><img id="itemPreview" class="previewImg hidden" alt="Vista previa"></div></label><label>Orden<input id="itemOrder" type="number" min="1"></label><label class="check"><input id="itemActive" type="checkbox"> Visible en el sitio</label><div class="modalActions"><button value="cancel">Cancelar</button><button type="button" class="primary" id="applyItem">Aplicar</button></div></form></dialog>
+<dialog id="galleryEditor">
+  <div class="galleryAdmin">
+
+    <div class="modalHead">
+      <div>
+        <p class="eyebrow">Galería del proyecto</p>
+        <h2 id="galleryTitle">Fotografías</h2>
+      </div>
+
+      <button
+        class="iconbtn"
+        id="closeGalleryAdmin"
+        type="button"
+        aria-label="Cerrar"
+      >
+        &times;
+      </button>
+    </div>
+
+    <div class="galleryAdminStatus">
+      <p class="galleryHelp">
+        La portada se administra desde <strong>Editar</strong>.
+        Aquí puedes agregar hasta <strong>10 fotografías adicionales</strong>.
+      </p>
+
+      <div
+        id="galleryCounter"
+        class="galleryCounter"
+        aria-live="polite"
+      >
+        <strong id="galleryCurrentCount">0</strong>
+        <span>/ 10 adicionales</span>
+      </div>
+    </div>
+
+    <label class="uploadBox">
+      <strong>Agregar fotografías</strong>
+
+      <input
+        id="galleryFiles"
+        type="file"
+        accept="image/jpeg,image/png,image/webp"
+        multiple
+      >
+
+      <small>
+        JPG, PNG o WEBP · máximo 5 MB por archivo ·
+        máximo 10 fotografías adicionales por proyecto.
+        Se convierten automáticamente a WEBP.
+      </small>
+    </label>
+
+    <button
+      type="button"
+      class="primary"
+      id="uploadGallery"
+    >
+      Subir fotografías
+    </button>
+
+    <div
+      id="galleryAdminList"
+      class="galleryAdminList"
+    ></div>
+
+  </div>
+</dialog>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="../config.js"></script><script src="../content.js"></script><script src="admin.js"></script></body></html>

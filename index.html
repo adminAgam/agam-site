@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="AGAM Ingeniería SAS: Construcción, consultoría y servicios complementarios. Proyectos hechos realidad." />
+  <title>AGAM Ingeniería SAS | Proyectos hechos realidad</title>
+
+  <!-- Google Fonts (ligero, solo 2 familias) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="#top" aria-label="AGAM Ingeniería SAS">
+        <img class="brand__logo"
+     src="./unnamed.png"
+     alt="AGAM Ingeniería SAS"
+     loading="eager" />
+
+      </a>
+
+      <nav class="nav" aria-label="Navegación principal">
+        <button class="nav__toggle" aria-expanded="false" aria-controls="menu">
+          <span class="sr">Abrir menú</span>
+          <span class="burger"></span>
+        </button>
+
+        <ul id="menu" class="nav__list">
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#proceso">Proceso</a></li>
+          <li><a href="#clientes">Clientes</a></li>
+          <li><a href="#contacto">Contáctanos</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__cta">
+        <a class="btn btn--ghost" href="#contacto">Primera llamada sin costo</a>
+        <a class="btn btn--primary" href="#contacto">Cotizar ahora</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main id="contenido">
+    <section id="top" class="hero">
+      <div class="container hero__inner">
+        <div class="hero__copy reveal">
+          <p class="pill">Ingeniería civil • Consultoría • Operación en Colombia</p>
+          <h1>Proyectos hechos realidad, con planificación y ejecución precisa.</h1>
+          <p class="lead">
+            Somos AGAM Ingeniería SAS: soluciones integrales para empresas que exigen calidad.
+            Convertimos necesidades de infraestructura en resultados medibles.
+          </p>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#contacto">Solicitar cotización</a>
+            <a class="btn btn--ghost" href="#servicios">Ver servicios</a>
+          </div>
+
+          <div class="hero__stats">
+            <div class="stat">
+              <strong>+5</strong>
+              <span>Años de experiencia</span>
+            </div>
+            <div class="stat">
+              <strong>Vial & Vivienda</strong>
+              <span>Proyectos a nivel nacional</span>
+            </div>
+            <div class="stat">
+              <strong>Enfoque</strong>
+              <span>Calidad • Seguridad • Cumplimiento</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__card reveal">
+          <div class="cardTop">
+            <h3>Respuesta en 24h</h3>
+            <p>Cuéntanos qué necesitas y te devolvemos contacto con una ruta clara.</p>
+          </div>
+
+          <div class="miniForm">
+            <label>
+              Nombre
+              <input id="name" type="text" placeholder="Tu nombre" autocomplete="name" />
+            </label>
+            <label>
+              Teléfono
+              <input id="phone" type="tel" placeholder="Ej. 3001234567" autocomplete="tel" />
+            </label>
+            <label>
+              Servicio
+              <select id="service">
+                <option value="Construcción">Construcción</option>
+                <option value="Consultoría">Consultoría</option>
+                <option value="Servicios complementarios">Servicios complementarios</option>
+              </select>
+            </label>
+
+            <button id="quoteBtn" class="btn btn--primary btn--full" type="button">
+              Enviar por WhatsApp
+            </button>
+
+            <p class="fineprint">
+              Al enviar, aceptas ser contactado(a) para tu solicitud. Sin spam.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__bg" aria-hidden="true"></div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios" class="section">
+      <div class="container">
+        <div class="section__head reveal">
+          <h2>Servicios principales</h2>
+          <p class="sub">
+            Estructuramos tu proyecto para reducir riesgos, controlar costos y asegurar entregables.
+          </p>
+        </div>
+
+        <div class="grid3">
+          <article class="card reveal">
+            <div class="icon">🏗️</div>
+            <h3>Construcción</h3>
+            <p>
+              Ejecución eficiente desde preparación del terreno hasta entrega final,
+              con control de calidad y seguridad en obra.
+            </p>
+            <ul class="bullets">
+              <li>Vías y urbanismo</li>
+              <li>Estructuras y cimentación</li>
+              <li>Planeación y control</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <div class="icon">📐</div>
+            <h3>Consultoría</h3>
+            <p>
+              Hacemos viable tu inversión con estudios, diseños y planificación estratégica.
+            </p>
+            <ul class="bullets">
+              <li>Estudios y diagnósticos</li>
+              <li>Diseño y presupuesto</li>
+              <li>Gestión de riesgos</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <div class="icon">🚧</div>
+            <h3>Servicios complementarios</h3>
+            <p>
+              Respaldo operativo para mantener el ritmo del proyecto cumpliendo normativa.
+            </p>
+            <ul class="bullets">
+              <li>Maquinaria especializada</li>
+              <li>Gestión del tráfico</li>
+              <li>Manejo de materiales/residuos</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proceso -->
+    <section id="proceso" class="section section--alt">
+      <div class="container">
+        <div class="section__head reveal">
+          <h2>Nuestro proceso</h2>
+          <p class="sub">Simple, claro y con responsables desde el día 1.</p>
+        </div>
+
+        <div class="steps">
+          <div class="step reveal">
+            <span class="step__n">01</span>
+            <div>
+              <h3>Levantamiento</h3>
+              <p>Entendemos alcance, tiempos, presupuesto y restricciones del proyecto.</p>
+            </div>
+          </div>
+
+          <div class="step reveal">
+            <span class="step__n">02</span>
+            <div>
+              <h3>Propuesta técnica</h3>
+              <p>Ruta de trabajo, hitos, entregables y plan de calidad/seguridad.</p>
+            </div>
+          </div>
+
+          <div class="step reveal">
+            <span class="step__n">03</span>
+            <div>
+              <h3>Ejecución y control</h3>
+              <p>Seguimiento, reportes y control de cambios para cumplir objetivos.</p>
+            </div>
+          </div>
+
+          <div class="step reveal">
+            <span class="step__n">04</span>
+            <div>
+              <h3>Entrega</h3>
+              <p>Cierre con documentación, actas y verificación de calidad.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Clientes -->
+    <section id="clientes" class="section">
+      <div class="container">
+        <div class="section__head reveal">
+          <h2>Nuestros clientes</h2>
+          <p class="sub">Confianza construida con resultados.</p>
+        </div>
+<!-- bonton ver clientes-->
+        <div style="text-align:center;margin-top:24px;">
+  <button class="btn btn--ghost" onclick="openGallery()">
+    Ver Proyectos
+  </button>
+</div>
+
+
+        <!-- Contenido administrable: se carga desde content.js / backend -->
+        <div id="clientsGrid" class="logos reveal" aria-label="Logos de clientes"></div>
+
+        <div class="ctaBand reveal">
+          <div>
+            <h3>¿Listo para iniciar?</h3>
+            <p>Te respondemos en 24h con los siguientes pasos y una propuesta clara.</p>
+          </div>
+          <a class="btn btn--primary" href="#contacto">Hablar con AGAM</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="section section--alt">
+      <div class="container">
+        <div class="section__head reveal">
+          <h2>Contáctanos</h2>
+          <p class="sub">Cajicá, Cundinamarca • Tel: 3137297652 / 3107816552 • proyectos@agamingenieria.com</p>
+        </div>
+
+        <div class="contactGrid">
+          <form class="form card reveal" id="contactForm" autocomplete="on">
+            <label>
+              Nombre
+              <input name="nombre" type="text" required placeholder="Tu nombre" autocomplete="name" />
+            </label>
+            <label>
+              Email
+              <input name="email" type="email" required placeholder="tu@email.com" autocomplete="email" />
+            </label>
+            <label>
+              Teléfono
+              <input name="telefono" type="tel" required placeholder="Ej. 3001234567" autocomplete="tel" />
+            </label>
+            <label>
+              Mensaje
+              <textarea name="mensaje" rows="4" required placeholder="Cuéntanos el alcance de tu necesidad"></textarea>
+            </label>
+
+            <button class="btn btn--primary btn--full" type="submit">Enviar (genera mensaje)</button>
+            <p class="fineprint">Este formulario no envía correos automáticamente: genera un mensaje seguro para WhatsApp/Email.</p>
+          </form>
+
+          <div class="info card reveal">
+            <h3>Atención rápida</h3>
+            <p>Si quieres respuesta inmediata, escríbenos por WhatsApp.</p>
+
+            <div class="info__list">
+              <div class="info__item">
+                <span class="k">Ubicación</span>
+                <span class="v">Cajicá, Cundinamarca</span>
+              </div>
+              <div class="info__item">
+                <span class="k">Teléfonos</span>
+                <span class="v">3137297652 • 3107816552</span>
+              </div>
+              <div class="info__item">
+                <span class="k">Correo</span>
+                <span class="v">proyectos@agamingenieria.com</span>
+              </div>
+            </div>
+
+            <a class="btn btn--ghost btn--full" id="emailBtn" href="#">
+              Enviar por correo
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div>
+          <strong>AGAM Ingeniería SAS</strong>
+          <p class="muted">Proyectos hechos realidad.</p>
+        </div>
+        <p class="muted">© <span id="year"></span> AGAM Ingeniería SAS</p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- WhatsApp Floating Button -->
+  <a class="wabtn" id="waFloat" href="#" aria-label="Chatear por WhatsApp">
+    <span>WhatsApp</span>
+  </a>
+
+  <!-- Modal flotante - Galería -->
+<div id="galleryModal" class="galleryModal" aria-hidden="true">
+  <div class="galleryOverlay"></div>
+
+  <div class="galleryContent">
+    <button class="galleryClose" aria-label="Cerrar galería">✕</button>
+
+    <h3>Proyectos</h3>
+
+    <div id="projectsGrid" class="galleryGrid"></div>
+  </div>
+</div>
+
+<div id="projectGalleryModal" class="galleryModal" aria-hidden="true"><div class="projectGalleryOverlay galleryOverlay"></div><div class="galleryContent"><button class="projectGalleryClose galleryClose" aria-label="Cerrar">✕</button><h3 id="projectGalleryTitle">Proyecto</h3><div id="projectGalleryGrid" class="projectGalleryGrid"></div></div></div>
+
+ <!-- Zoom individual (Lightbox) - Fase 3.3.2 -->
+<div id="zoomModal" class="zoomModal" aria-hidden="true">
+  <div class="zoomOverlay"></div>
+
+  <div class="zoomContent" role="dialog" aria-modal="true" aria-label="Vista ampliada">
+    <button class="zoomClose" type="button" aria-label="Cerrar zoom">&times;</button>
+
+    <button id="zoomPrev" class="zoomNav zoomPrev" type="button" aria-label="Fotografía anterior">
+      &#10094;
+    </button>
+
+    <img id="zoomImg" src="" alt="">
+
+    <button id="zoomNext" class="zoomNav zoomNext" type="button" aria-label="Fotografía siguiente">
+      &#10095;
+    </button>
+
+    <div class="zoomInfo">
+      <p id="zoomCaption" class="zoomCaption"></p>
+      <span id="zoomCounter" class="zoomCounter" aria-live="polite"></span>
+    </div>
+  </div>
+</div>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="content.js"></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
