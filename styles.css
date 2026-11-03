@@ -1112,4 +1112,57 @@ input:focus, select:focus, textarea:focus{
   }
 }
 
+/* =========================================================
+   FASE 3.5.2 - CATEGORIA Y PROYECTO DESTACADO
+   ========================================================= */
 
+.projectMeta{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-bottom:9px;
+}
+
+.projectCategory,
+.projectFeatured{
+  display:inline-flex;
+  align-items:center;
+  width:max-content;
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:.68rem;
+  font-weight:800;
+  line-height:1;
+  letter-spacing:.03em;
+}
+
+.projectCategory{
+  color:#475569;
+  background:#f1f5f9;
+  border:1px solid #e2e8f0;
+}
+
+.projectFeatured{
+  color:#315a21;
+  background:#edfbe5;
+  border:1px solid #cceeb9;
+}
+
+.projectTile:has(.projectFeatured){
+  border-color:rgba(123,212,74,.45);
+  box-shadow:0 12px 30px rgba(2,6,23,.08);
+}
+
+@media (max-width:640px){
+  .projectMeta{
+    gap:6px;
+    margin-bottom:8px;
+  }
+
+  .projectCategory,
+  .projectFeatured{
+    font-size:.64rem;
+    padding:5px 8px;
+  }
+}
