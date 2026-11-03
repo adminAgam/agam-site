@@ -3,7 +3,13 @@ window.AGAM_DEFAULT_CONTENT = {
     whatsapp: "573137297652",
     email: "proyectos@agamingenieria.com",
     phones: "3137297652",
-    location: "Cajicá, Cundinamarca"
+    location: "Cajicá, Cundinamarca",
+    companyName: "AGAM Ingeniería SAS",
+    companyTagline: "Proyectos hechos realidad.",
+    responseTime: "24h",
+    experienceYears: "+5",
+    businessScope: "Vial & Vivienda",
+    businessFocus: "Calidad • Seguridad • Cumplimiento"
   },
   clients: [
     {id:"enel", name:"ENEL", image:"Enel.jpg", active:true, order:1},
