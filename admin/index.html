@@ -1,13 +1,302 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>AGAM | Administración</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="admin.css"></head><body>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>AGAM | Administración</title><link rel="icon" type="image/png" href="../unnamed.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="admin.css"></head><body>
 <div id="loginGate" class="loginGate"><form id="loginForm" class="loginCard"><img src="../unnamed.png" alt="AGAM"><h1>Administración segura</h1><p>Ingresa con el usuario administrador autorizado.</p><label>Correo<input id="loginEmail" type="email" autocomplete="username" required></label><label>Contraseña<input id="loginPassword" type="password" autocomplete="current-password" required></label><button class="primary" type="submit">Ingresar</button><p id="loginMessage" class="dangerText"></p></form></div>
-<div class="shell"><aside><a class="brand" href="../"><img src="../unnamed.png" alt="AGAM"><span>Administrador</span></a><nav><button class="navbtn active" data-view="dashboard">Resumen</button><button class="navbtn" data-view="projects">Proyectos</button><button class="navbtn" data-view="clients">Clientes</button><button class="navbtn" data-view="settings">Configuración</button></nav><div class="asideFoot"><span class="statusDot"></span><small id="backendStatus">Conectando…</small><a href="../" target="_blank">Ver sitio público ↗</a></div></aside>
-<main><header><div><p class="eyebrow">AGAM Ingeniería SAS</p><h1 id="viewTitle">Panel administrativo</h1></div><div class="userbar"><small id="adminEmail"></small><button id="logoutBtn">Cerrar sesión</button><button class="primary" id="saveAll">Guardar cambios</button></div></header><div id="notice" class="notice"><strong>Fase 3.</strong> Administración segura, optimización de imágenes y limpieza automática de archivos activa.</div>
-<section id="dashboard" class="view active"><div class="stats"><article><span>Proyectos</span><strong id="projectCount">0</strong><small>publicados</small></article><article><span>Clientes</span><strong id="clientCount">0</strong><small>visibles</small></article><article><span>Estado</span><strong class="ok">Activo</strong><small id="syncLabel">sincronizado</small></article></div><div class="panel"><h2>Administración simple</h2><p>Desde aquí podrás cambiar fotografías de proyectos, crear proyectos, agregar clientes y modificar los datos principales sin editar código.</p><div class="quick"><button data-go="projects">＋ Nuevo proyecto</button><button data-go="clients">＋ Nuevo cliente</button><button data-go="settings">⚙ Datos de contacto</button></div></div></section>
+<div class="shell"><aside><a class="brand" href="../"><img src="../unnamed.png" alt="AGAM"><span>Administrador</span></a><nav><button class="navbtn active" data-view="dashboard">Resumen</button><button class="navbtn" data-view="projects">Proyectos</button>
+<button class="navbtn" data-view="clients">Clientes</button>
+<button class="navbtn" data-view="trash">Papelera</button>
+<button class="navbtn" data-view="activity">Actividad</button>
+<button class="navbtn" data-view="settings">Configuración</button>
+</nav><div class="asideFoot"><span class="statusDot"></span><small id="backendStatus">Conectando…</small><a href="../" target="_blank">Ver sitio público ↗</a></div></aside>
+<main><header><div><p class="eyebrow">AGAM Ingeniería SAS</p><h1 id="viewTitle">Panel administrativo</h1></div><div class="userbar"><small id="adminEmail"></small><button id="logoutBtn">Cerrar sesión</button><button class="primary" id="saveAll">Guardar cambios</button></div></header><div id="notice" class="notice"><strong>AGAM Admin.</strong> Gestión segura de proyectos, clientes, contenido multimedia y configuración empresarial.</div>
+
+<section id="dashboard" class="view active">
+  <div class="dashboardIntro">
+    <div>
+      <p class="eyebrow">Resumen operativo</p>
+      <h2>Estado del sitio AGAM</h2>
+      <p>Consulta rápidamente el contenido publicado, los elementos ocultos y el estado general de la plataforma.</p>
+    </div>
+    <span class="dashboardStatus"><span class="statusDot"></span> Sistema operativo</span>
+  </div>
+
+  <div class="stats dashboardStats">
+    <article>
+      <span>Proyectos publicados</span>
+      <strong id="projectCount">0</strong>
+      <small>visibles en el sitio</small>
+    </article>
+
+    <article>
+      <span>Proyectos ocultos</span>
+      <strong id="projectHiddenCount">0</strong>
+      <small>no visibles al público</small>
+    </article>
+
+    <article>
+      <span>Clientes visibles</span>
+      <strong id="clientCount">0</strong>
+      <small>mostrados actualmente</small>
+    </article>
+
+    <article>
+      <span>Clientes ocultos</span>
+      <strong id="clientHiddenCount">0</strong>
+      <small>no visibles al público</small>
+    </article>
+
+    <article>
+      <span>Galería</span>
+      <strong id="galleryImageCount">0</strong>
+      <small>fotografías adicionales</small>
+    </article>
+
+    <article>
+      <span>Estado</span>
+      <strong class="ok">Activo</strong>
+      <small id="syncLabel">sincronizado</small>
+    </article>
+  </div>
+
+  <div class="dashboardGrid">
+    <div class="panel dashboardPanel">
+      <div class="dashboardPanelHead">
+        <div>
+          <p class="eyebrow">Contenido</p>
+          <h2>Resumen de administración</h2>
+        </div>
+      </div>
+
+      <div class="dashboardSummary">
+        <div>
+          <span>Total proyectos</span>
+          <strong id="projectTotalCount">0</strong>
+        </div>
+        <div>
+          <span>Total clientes</span>
+          <strong id="clientTotalCount">0</strong>
+        </div>
+        <div>
+          <span>Total imágenes</span>
+          <strong id="mediaTotalCount">0</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel dashboardPanel">
+      <p class="eyebrow">Acciones rápidas</p>
+      <h2>Administrar contenido</h2>
+      <p>Accede directamente a las tareas más utilizadas del sitio.</p>
+
+      <div class="quick dashboardQuick">
+        <button data-go="projects">+ Nuevo proyecto</button>
+        <button data-go="clients">+ Nuevo cliente</button>
+        <button data-go="settings">Datos de contacto</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="projects" class="view"><div class="sectionHead"><div><h2>Proyectos</h2><p>Administra las fotografías y la información que aparece en “Ver Proyectos”.</p></div><div class="sectionTools"><input id="projectSearch" class="searchInput" type="search" placeholder="Buscar proyecto…"><button class="primary" id="addProject">＋ Agregar proyecto</button></div></div><div id="projectList" class="cards"></div></section>
-<section id="clients" class="view"><div class="sectionHead"><div><h2>Clientes</h2><p>Agrega, oculta, reemplaza o elimina logos de clientes.</p></div><div class="sectionTools"><input id="clientSearch" class="searchInput" type="search" placeholder="Buscar cliente…"><button class="primary" id="addClient">＋ Agregar cliente</button></div></div><div id="clientList" class="cards"></div></section>
-<section id="settings" class="view"><div class="sectionHead"><div><h2>Configuración</h2><p>Datos generales utilizados por el sitio.</p></div></div><div class="panel formgrid"><label>WhatsApp<input id="sWhatsapp"></label><label>Correo<input id="sEmail" type="email"></label><label>Teléfonos<input id="sPhones"></label><label>Ubicación<input id="sLocation"></label></div><div class="panel maintenance"><h2>Galerías de proyectos</h2><p>En <strong>Proyectos → Galería</strong> puedes agregar fotografías adicionales. La imagen principal continúa siendo la portada.</p></div><div class="panel maintenance"><h2>Mantenimiento</h2><p>Revisa Storage y elimina únicamente imágenes de <code>projects/</code> y <code>clients/</code> que ya no estén asociadas a ningún registro.</p><button id="cleanupMedia">🧹 Buscar y limpiar archivos huérfanos</button></div></section>
+<section id="trash" class="view">
+  <div class="sectionHead">
+    <div>
+      <h2>Papelera</h2>
+      <p>
+        Los proyectos y clientes enviados a la papelera dejan de mostrarse
+        públicamente, pero sus registros e imágenes se conservan hasta que
+        sean eliminados definitivamente.
+      </p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="cardTop">
+      <div>
+        <p class="eyebrow">CONTENIDO ARCHIVADO</p>
+        <h2>Proyectos</h2>
+      </div>
+      <span class="badge off" id="trashProjectCount">0</span>
+    </div>
+
+    <div id="trashProjectList" class="cards"></div>
+  </div>
+
+  <div class="panel">
+    <div class="cardTop">
+      <div>
+        <p class="eyebrow">CONTENIDO ARCHIVADO</p>
+        <h2>Clientes</h2>
+      </div>
+      <span class="badge off" id="trashClientCount">0</span>
+    </div>
+
+    <div id="trashClientList" class="cards"></div>
+  </div>
+</section>
+<section id="activity" class="view">
+  <div class="sectionHead">
+    <div>
+      <h2>Actividad</h2>
+      <p>Historial de acciones administrativas realizadas sobre el contenido del sitio.</p>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="cardTop">
+      <div>
+        <p class="eyebrow">REGISTRO DE ACTIVIDAD</p>
+        <h2>Historial administrativo</h2>
+      </div>
+      <span class="badge" id="activityCount">0</span>
+    </div>
+    <div id="activityList" class="activityList">
+      <p>No hay actividad registrada.</p>
+    </div>
+  </div>
+</section>
+<section id="clients" class="view">
+<div class="sectionHead"><div><h2>Clientes</h2><p>Agrega, oculta, reemplaza o elimina logos de clientes.</p></div><div class="sectionTools"><input id="clientSearch" class="searchInput" type="search" placeholder="Buscar cliente…"><button class="primary" id="addClient">＋ Agregar cliente</button></div></div><div id="clientList" class="cards"></div></section>
+<section id="settings" class="view">
+  <div class="sectionHead">
+    <div>
+      <h2>Configuración empresarial</h2>
+      <p>Administra los datos corporativos utilizados por el sitio público.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Identidad empresarial</h3>
+    <div class="formgrid">
+      <label>
+        Nombre empresarial
+        <input id="sCompanyName" maxlength="100" placeholder="AGAM Ingeniería SAS">
+      </label>
+
+      <label>
+        Lema
+        <input id="sCompanyTagline" maxlength="120" placeholder="Proyectos hechos realidad.">
+      </label>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Contacto</h3>
+    <div class="formgrid">
+      <label>
+        WhatsApp
+        <input id="sWhatsapp" maxlength="20" placeholder="573137297652">
+      </label>
+
+      <label>
+        Correo
+        <input id="sEmail" type="email" maxlength="150" placeholder="proyectos@agamingenieria.com">
+      </label>
+
+      <label>
+        Teléfonos
+        <input id="sPhones" maxlength="100" placeholder="3137297652 • 3107816552">
+      </label>
+
+      <label>
+        Ubicación
+        <input id="sLocation" maxlength="150" placeholder="Cajicá, Cundinamarca">
+      </label>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Información comercial</h3>
+    <div class="formgrid">
+      <label>
+        Tiempo de respuesta
+        <input id="sResponseTime" maxlength="40" placeholder="24h">
+      </label>
+
+      <label>
+        Experiencia
+        <input id="sExperienceYears" maxlength="40" placeholder="+5">
+      </label>
+
+      <label>
+        Área / alcance
+        <input id="sBusinessScope" maxlength="100" placeholder="Vial & Vivienda">
+      </label>
+
+      <label>
+        Enfoque empresarial
+        <input id="sBusinessFocus" maxlength="150" placeholder="Calidad • Seguridad • Cumplimiento">
+      </label>
+    </div>
+  </div>
+
+  <div class="panel maintenance">
+    <h2>Galerías de proyectos</h2>
+    <p>
+      En <strong>Proyectos → Galería</strong> puedes agregar fotografías adicionales.
+      La imagen principal continúa siendo la portada.
+    </p>
+  </div>
+
+  <div class="panel maintenance">
+    <h2>Mantenimiento</h2>
+    <p>
+      Revisa Storage y elimina únicamente imágenes de
+      <code>projects/</code> y <code>clients/</code>
+      que ya no estén asociadas a ningún registro.
+    </p>
+    <button id="cleanupMedia">🧹 Buscar y limpiar archivos huérfanos</button>
+  </div>
+</section>
 </main></div>
-<dialog id="editor"><form method="dialog" id="editorForm"><div class="modalHead"><div><p class="eyebrow" id="editorType">Contenido</p><h2 id="editorTitle">Editar</h2></div><button class="iconbtn" value="cancel" aria-label="Cerrar">×</button></div><input type="hidden" id="itemId"><input type="hidden" id="itemKind"><label>Nombre / título<input id="itemName" required></label><label id="descWrap">Descripción<textarea id="itemDesc" rows="3"></textarea></label><label>Imagen<input id="itemImage" placeholder="URL o ruta de imagen"><div class="uploadBox"><strong>Subir nueva imagen</strong><input id="itemFile" type="file" accept="image/jpeg,image/png,image/webp"><small>JPG, PNG o WEBP · máximo 5 MB. Se convierte automáticamente a WEBP optimizado.</small><small id="fileInfo"></small><img id="itemPreview" class="previewImg hidden" alt="Vista previa"></div></label><label>Orden<input id="itemOrder" type="number" min="1"></label><label class="check"><input id="itemActive" type="checkbox"> Visible en el sitio</label><div class="modalActions"><button value="cancel">Cancelar</button><button type="button" class="primary" id="applyItem">Aplicar</button></div></form></dialog>
+<dialog id="editor"><form method="dialog" id="editorForm"><div class="modalHead"><div><p class="eyebrow" id="editorType">Contenido</p><h2 id="editorTitle">Editar</h2></div><button class="iconbtn" value="cancel" aria-label="Cerrar">×</button></div><input type="hidden" id="itemId"><input type="hidden" id="itemKind"><label>Nombre / título<input id="itemName" required></label><label id="descWrap">Descripción<textarea id="itemDesc" rows="3"></textarea></label><label>Imagen<input id="itemImage" placeholder="URL o ruta de imagen">
+
+<div class="uploadBox" id="itemDropZone" tabindex="0" role="button" aria-label="Subir imagen. Puedes seleccionar un archivo o arrastrarlo aquí."><strong>Subir nueva imagen</strong><span class="dropHint">Selecciona un archivo o arrástralo y suéltalo aquí</span><input id="itemFile" type="file" accept="image/jpeg,image/png,image/webp"><small>JPG, PNG o WEBP · máximo 5 MB. Se convierte automáticamente a WEBP optimizado.</small><small id="fileInfo"></small><img id="itemPreview" class="previewImg hidden" alt="Vista previa"></div></label>
+
+<div id="projectMetaWrap" class="projectMetaFields">
+  <label>Fecha del proyecto
+    <input id="itemProjectDate" type="date">
+  </label>
+
+  <label>Estado del proyecto
+    <select id="itemProjectStatus">
+      <option value="En ejecucion">En ejecución</option>
+      <option value="Finalizado">Finalizado</option>
+      <option value="Suspendido">Suspendido</option>
+    </select>
+  </label>
+
+  <label>Categoría
+    <input id="itemProjectCategory" type="text" maxlength="80" placeholder="Ej. Ingeniería eléctrica">
+  </label>
+
+  <div class="projectSeoFields">
+    <p class="eyebrow">SEO Y ACCESIBILIDAD</p>
+    <label>Titulo SEO
+      <input id="itemSeoTitle" type="text" maxlength="60" placeholder="Titulo para buscadores">
+      <small>Maximo 60 caracteres. Si se deja vacio se usara el titulo del proyecto.</small>
+    </label>
+    <label>Descripcion SEO
+      <textarea id="itemSeoDescription" rows="3" maxlength="160" placeholder="Descripcion para resultados de busqueda"></textarea>
+      <small>Maximo 160 caracteres. Si se deja vacio se usara la descripcion del proyecto.</small>
+    </label>
+    <label>Texto ALT de la portada
+      <input id="itemImageAlt" type="text" maxlength="180" placeholder="Describe brevemente la imagen principal">
+      <small>Describe lo que muestra la imagen. Si se deja vacio se usara el titulo del proyecto.</small>
+    </label>
+  </div>
+
+  <label class="check projectFeaturedCheck">
+    <input id="itemFeatured" type="checkbox">
+    Proyecto destacado
+  </label>
+</div>
+<label>Orden<input id="itemOrder" type="number" min="1"></label><label class="check"><input id="itemActive" type="checkbox"> Visible en el sitio</label>
+
+<div class="modalActions">
+  <button type="button" id="previewItem">Vista previa</button>
+  <button value="cancel">Cancelar</button>
+  <button type="button" class="primary" id="applyItem">Aplicar</button>
+</div>
+
+</form></dialog>
 <dialog id="galleryEditor">
   <div class="galleryAdmin">
 
@@ -27,6 +316,12 @@
       </button>
     </div>
 
+<div
+  id="galleryNotice"
+  class="notice"
+  aria-live="polite"
+  hidden
+></div>
     <div class="galleryAdminStatus">
       <p class="galleryHelp">
         La portada se administra desde <strong>Editar</strong>.
@@ -43,8 +338,9 @@
       </div>
     </div>
 
-    <label class="uploadBox">
+    <label class="uploadBox galleryDropZone" id="galleryDropZone">
       <strong>Agregar fotografías</strong>
+	<span class="dropHint">Selecciona varias imágenes o arrástralas y suéltalas aquí</span>
 
       <input
         id="galleryFiles"
@@ -75,4 +371,4 @@
 
   </div>
 </dialog>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="../config.js"></script><script src="../content.js"></script><script src="admin.js"></script></body></html>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script><script src="../config.js"></script><script src="../content.js"></script><script src="admin.js"></script></body></html>
