@@ -19,14 +19,16 @@
 
       const [pr, cl, st, gi] = await Promise.all([
         sb.from("projects")
-          .select("*")
-          .eq("active", true)
-          .order("sort_order"),
+  .select("*")
+  .eq("active", true)
+  .eq("archived", false)
+  .order("sort_order"),
 
-        sb.from("clients")
-          .select("*")
-          .eq("active", true)
-          .order("sort_order"),
+sb.from("clients")
+  .select("*")
+  .eq("active", true)
+  .eq("archived", false)
+  .order("sort_order"),
 
         sb.from("site_settings")
           .select("*")
@@ -48,15 +50,28 @@
         return acc;
       }, {});
 
+      const galleryAlt = (gi.data || []).reduce((acc, image) => {
+        (acc[image.project_id] ??= []).push(image.alt_text || "");
+        return acc;
+      }, {});
+
       return {
         projects: (pr.data || []).map(x => ({
           id: x.id,
           title: x.title,
           image: x.image_url,
           description: x.description || "",
-          active: x.active,
-          order: x.sort_order,
-          gallery: galleries[x.id] || []
+	active: x.active,
+	order: x.sort_order,
+	projectDate: x.project_date || "",
+	projectStatus: x.project_status || "En ejecucion",
+	category: x.project_category || "General",
+	featured: x.featured === true,
+	seoTitle: x.seo_title || "",
+	seoDescription: x.seo_description || "",
+	imageAlt: x.image_alt || "",
+	gallery: galleries[x.id] || [],
+	galleryAlt: galleryAlt[x.id] || []
         })),
 
         clients: (cl.data || []).map(x => ({
@@ -68,13 +83,37 @@
         })),
 
         settings: st.data
-          ? {
-              whatsapp: st.data.whatsapp || "",
-              email: st.data.email || "",
-              phones: st.data.phones || "",
-              location: st.data.location || ""
-            }
-          : defaults.settings
+  ? {
+      whatsapp: st.data.whatsapp || "",
+      email: st.data.email || "",
+      phones: st.data.phones || "",
+      location: st.data.location || "",
+      companyName:
+        st.data.company_name ||
+        defaults.settings?.companyName ||
+        "AGAM Ingeniería SAS",
+      companyTagline:
+        st.data.company_tagline ||
+        defaults.settings?.companyTagline ||
+        "Proyectos hechos realidad.",
+      responseTime:
+        st.data.response_time ||
+        defaults.settings?.responseTime ||
+        "24h",
+      experienceYears:
+        st.data.experience_years ||
+        defaults.settings?.experienceYears ||
+        "+5",
+      businessScope:
+        st.data.business_scope ||
+        defaults.settings?.businessScope ||
+        "Vial & Vivienda",
+      businessFocus:
+        st.data.business_focus ||
+        defaults.settings?.businessFocus ||
+        "Calidad • Seguridad • Cumplimiento"
+    }
+  : defaults.settings
       };
     } catch (e) {
       console.warn(
@@ -117,7 +156,8 @@
             <img
               src="${esc(c.image)}"
               alt="${esc(c.name)}"
-              loading="lazy"
+              
+ 	      
             >
           </div>
         `
@@ -141,20 +181,36 @@
             class="projectTile"
             data-project="${esc(p.id)}"
           >
-            <img
-              src="${esc(p.image)}"
-              alt="${esc(p.title)}"
+           <img
+  	      src="${esc(p.image)}"
+              alt="${esc(p.imageAlt || p.title)}"
               loading="lazy"
-            >
+              width="320"
+              height="180"
+           >
 
-            <div>
-              <strong>${esc(p.title)}</strong>
+           <div>
+  <div class="projectMeta">
+    ${
+      p.category
+        ? `<span class="projectCategory">${esc(p.category)}</span>`
+        : ""
+    }
 
-              ${
-                p.description
-                  ? `<p>${esc(p.description)}</p>`
-                  : ""
-              }
+    ${
+      p.featured
+        ? `<span class="projectFeatured">Destacado</span>`
+        : ""
+    }
+ 	 </div>
+
+ 	 <strong>${esc(p.title)}</strong>
+
+ 	 ${
+  	 p.description
+     	 ? `<p>${esc(p.description)}</p>`
+     	 : ""
+  	}
 
               ${
                 p.gallery?.length
@@ -236,6 +292,75 @@
     );
   }
 
+/* =========================================================
+   CONFIGURACION EMPRESARIAL
+   ========================================================= */
+
+const companyName =
+  content.settings?.companyName ||
+  "AGAM Ingeniería SAS";
+
+const companyTagline =
+  content.settings?.companyTagline ||
+  "Proyectos hechos realidad.";
+
+const responseTime =
+  content.settings?.responseTime ||
+  "24h";
+
+const experienceYears =
+  content.settings?.experienceYears ||
+  "+5";
+
+const businessScope =
+  content.settings?.businessScope ||
+  "Vial & Vivienda";
+
+const businessFocus =
+  content.settings?.businessFocus ||
+  "Calidad • Seguridad • Cumplimiento";
+
+const businessExperienceEl =
+  document.getElementById("businessExperience");
+
+const businessScopeEl =
+  document.getElementById("businessScope");
+
+const businessFocusEl =
+  document.getElementById("businessFocus");
+
+const businessResponseEl =
+  document.getElementById("businessResponse");
+
+const footerCompanyNameEl =
+  document.getElementById("footerCompanyName");
+
+const footerCompanyTaglineEl =
+  document.getElementById("footerCompanyTagline");
+
+const footerCopyrightNameEl =
+  document.getElementById("footerCopyrightName");
+
+if (businessExperienceEl)
+  businessExperienceEl.textContent = experienceYears;
+
+if (businessScopeEl)
+  businessScopeEl.textContent = businessScope;
+
+if (businessFocusEl)
+  businessFocusEl.textContent = businessFocus;
+
+if (businessResponseEl)
+  businessResponseEl.textContent = `Respuesta en ${responseTime}`;
+
+if (footerCompanyNameEl)
+  footerCompanyNameEl.textContent = companyName;
+
+if (footerCompanyTaglineEl)
+  footerCompanyTaglineEl.textContent = companyTagline;
+
+if (footerCopyrightNameEl)
+  footerCopyrightNameEl.textContent = companyName;
   /* =========================================================
      WHATSAPP Y CONTACTO
      ========================================================= */
@@ -362,6 +487,14 @@
   };
 
   window.closeGallery = () => {
+    if (
+      gallery &&
+      document.activeElement &&
+      gallery.contains(document.activeElement)
+    ) {
+      document.activeElement.blur();
+    }
+
     gallery?.classList.remove("active");
 
     gallery?.setAttribute(
@@ -385,6 +518,51 @@
     );
 
   /* =========================================================
+     FASE 3.5.6
+     SEO DINAMICO DE PROYECTOS
+     ========================================================= */
+
+  const pageSeoTitle = document.title;
+
+  const pageSeoDescriptionMeta =
+    document.querySelector(
+      'meta[name="description"]'
+    );
+
+  const pageSeoDescription =
+    pageSeoDescriptionMeta
+      ?.getAttribute("content") || "";
+
+  function applyProjectSeo(project) {
+    if (!project) return;
+
+    document.title =
+      project.seoTitle ||
+      project.title ||
+      pageSeoTitle;
+
+    if (pageSeoDescriptionMeta) {
+      pageSeoDescriptionMeta.setAttribute(
+        "content",
+        project.seoDescription ||
+        project.description ||
+        pageSeoDescription
+      );
+    }
+  }
+
+  function restorePageSeo() {
+    document.title = pageSeoTitle;
+
+    if (pageSeoDescriptionMeta) {
+      pageSeoDescriptionMeta.setAttribute(
+        "content",
+        pageSeoDescription
+      );
+    }
+  }
+
+  /* =========================================================
      GALERÍA DE UN PROYECTO
      ========================================================= */
 
@@ -404,6 +582,7 @@
     );
 
   let currentProjectPhotos = [];
+  let currentProjectAlts = [];
   let currentProjectTitle = "";
 
   function openProjectGallery(
@@ -412,11 +591,30 @@
   ) {
     if (!pg || !pgGrid) return;
 
+    applyProjectSeo(project);
+
     currentProjectPhotos =
       (photos || []).filter(Boolean);
 
     currentProjectTitle =
       project?.title || "Proyecto";
+
+    currentProjectAlts =
+      currentProjectPhotos.map(
+        (src, index) => {
+          if (index === 0) {
+            return (
+              project?.imageAlt ||
+              currentProjectTitle
+            );
+          }
+
+          return (
+            project?.galleryAlt?.[index - 1] ||
+            `${currentProjectTitle} - foto ${index + 1}`
+          );
+        }
+      );
 
     if (pgTitle) {
       pgTitle.textContent =
@@ -434,10 +632,12 @@
               aria-label="Abrir foto ${index + 1} de ${currentProjectPhotos.length}"
             >
               <img
-                src="${esc(src)}"
-                alt="${esc(currentProjectTitle)} - foto ${index + 1}"
-                loading="lazy"
-              >
+  		src="${esc(src)}"
+  		alt="${esc(currentProjectAlts[index] || currentProjectTitle)}"
+ 		 loading="lazy"
+  		width="800"
+  		height="600"
+	>
             </button>
           `
         )
@@ -452,6 +652,8 @@
   }
 
   function closeProjectGallery() {
+    restorePageSeo();
+
     pg?.classList.remove("active");
 
     pg?.setAttribute(
@@ -460,6 +662,7 @@
     );
 
     currentProjectPhotos = [];
+    currentProjectAlts = [];
     currentProjectTitle = "";
   }
 
@@ -501,6 +704,7 @@
     document.getElementById("zoomNext");
 
   let zoomPhotos = [];
+  let zoomAlts = [];
   let zoomIndex = 0;
   let zoomTitle = "";
 
@@ -519,9 +723,12 @@
     zoomImg.src = src;
 
     zoomImg.alt =
-      zoomTitle
-        ? `${zoomTitle} - foto ${zoomIndex + 1}`
-        : `Foto ${zoomIndex + 1}`;
+      zoomAlts[zoomIndex] ||
+      (
+        zoomTitle
+          ? `${zoomTitle} - foto ${zoomIndex + 1}`
+          : `Foto ${zoomIndex + 1}`
+      );
 
     if (zoomCaption) {
       zoomCaption.textContent =
@@ -551,7 +758,8 @@
     src,
     title = "",
     photos = null,
-    index = null
+    index = null,
+    alts = null
   ) {
     if (!zoom || !zoomImg) return;
 
@@ -562,6 +770,13 @@
         : [src].filter(Boolean);
 
     if (!zoomPhotos.length) return;
+
+    zoomAlts =
+      Array.isArray(alts)
+        ? zoomPhotos.map(
+            (_, i) => alts[i] || ""
+          )
+        : [];
 
     let requestedIndex =
       Number.isInteger(index)
@@ -591,8 +806,18 @@
   function closeZoom() {
     if (!zoom || !zoomImg) return;
 
+    const projectGalleryOpen =
+      pg?.classList.contains("active");
+
+    if (!projectGalleryOpen) {
+      restorePageSeo();
+    }
+
     zoom.classList.remove("active");
 
+    if (zoom.contains(document.activeElement)) {
+    document.activeElement.blur();
+   }
     zoom.setAttribute(
       "aria-hidden",
       "true"
@@ -609,6 +834,7 @@
     }
 
     zoomPhotos = [];
+    zoomAlts = [];
     zoomIndex = 0;
     zoomTitle = "";
   }
@@ -827,13 +1053,16 @@
        * se abre directamente en lightbox.
        */
       if (photos.length <= 1) {
+        applyProjectSeo(project);
+
         openZoom(
           photos[0] || project.image,
           project.title,
           photos.length
             ? photos
             : [project.image],
-          0
+          0,
+          [project.imageAlt || project.title]
         );
 
         return;
@@ -880,7 +1109,8 @@
         currentProjectPhotos[index],
         currentProjectTitle,
         currentProjectPhotos,
-        index
+        index,
+        currentProjectAlts
       );
     }
   );
